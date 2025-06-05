@@ -1,0 +1,3 @@
+packages:
+      - 'apps/*' # Tous les projets applicatifs seront dans un dossier 'apps'
+      - 'packages/*' # Si vous avez des bibliothèques partagées, elles iront ici
