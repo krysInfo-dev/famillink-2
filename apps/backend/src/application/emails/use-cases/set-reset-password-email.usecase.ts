@@ -4,14 +4,28 @@ import { EMailsSender } from 'src/domain/emails/services/emails-sender';
 import { EMAILS_SERVICE_TOKEN } from 'src/domain/emails/services/emails-sender.injection-token';
 import { User } from 'src/domain/users/entities/user';
 
+/**
+ * Use case for sending a password reset email.
+ * This class is responsible for sending a templated email to the user with a link to reset their password.
+ */
 @Injectable()
 export class SetResetPasswordEmailUseCase {
+  /**
+   * @param {EMailsSender} emailsSender - The email sending service.
+   * @param {ConfigProvider} configProvider - The configuration provider to get application settings.
+   */
   constructor(
     @Inject(EMAILS_SERVICE_TOKEN)
     private readonly emailsSender: EMailsSender,
     private readonly configProvider: ConfigProvider,
   ) {}
 
+  /**
+   * Executes the email sending process.
+   * @param {string} token - The password reset token.
+   * @param {User} user - The user to whom the email will be sent.
+   * @returns {Promise<void>} A promise that resolves when the email has been sent.
+   */
   async execute(token: string, user: User): Promise<void> {
     await this.emailsSender.sendTemplatedEmail({
       to: user.userName,

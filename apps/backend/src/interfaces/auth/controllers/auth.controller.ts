@@ -15,9 +15,21 @@ import { VerifyResetPasswordTokenUseCase } from 'src/application/auth/use-cases/
 import { UserDto } from 'src/interfaces/users/dtos/user.dto';
 import { ResetPasswordUseCase } from 'src/application/auth/use-cases/reset-password.usecase';
 
+/**
+ * @controller AuthController
+ * @description Handles authentication-related requests.
+ */
 @ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
+  /**
+   * @constructor
+   * @param {LoginUseCase} loginUseCase - Use case for user login.
+   * @param {LogoutUseCase} logoutUseCase - Use case for user logout.
+   * @param {CreateRequestForPasswordResetUseCase} createRequestForPasswordResetUseCase - Use case for creating a password reset request.
+   * @param {VerifyResetPasswordTokenUseCase} verifyResetPasswordTokenUseCase - Use case for verifying a password reset token.
+   * @param {ResetPasswordUseCase} resetPasswordUseCase - Use case for resetting a password.
+   */
   constructor(
     private readonly loginUseCase: LoginUseCase,
     private readonly logoutUseCase: LogoutUseCase,
@@ -26,6 +38,12 @@ export class AuthController {
     private readonly resetPasswordUseCase: ResetPasswordUseCase,
   ) {}
 
+  /**
+   * @method login
+   * @description Authenticates a user and returns user information with an access token.
+   * @param {LoginInfoDto} loginInfo - The login credentials.
+   * @returns {Promise<LoggedUserInfoDto>} The logged-in user's information.
+   */
   @Public()
   @HttpCode(HttpStatus.OK)
   @Post('login')
@@ -51,6 +69,12 @@ export class AuthController {
     });
   }
 
+  /**
+   * @method logout
+   * @description Logs out a user by invalidating their token.
+   * @param {LogoutInfoDto} logoutInfo - The logout information containing the token.
+   * @returns {Promise<void>}
+   */
   @Public()
   @HttpCode(HttpStatus.OK)
   @Post('logout')
@@ -67,6 +91,12 @@ export class AuthController {
     await this.logoutUseCase.execute(logoutInfo).then(() => undefined);
   }
 
+  /**
+   * @method forgetPassword
+   * @description Initiates the password reset process by sending a reset link to the user's email.
+   * @param {ForgetPasswordDto} param - The user's identifier.
+   * @returns {Promise<void>}
+   */
   @UseApiKey()
   @HttpCode(HttpStatus.OK)
   @Post('forget-password')
@@ -90,6 +120,12 @@ export class AuthController {
       .then(() => undefined);
   }
 
+  /**
+   * @method verifyResetPasswordToken
+   * @description Verifies if a password reset token is valid and returns user information.
+   * @param {VerifyResetPasswordTokenDto} param - The token and user identifier.
+   * @returns {Promise<UserDto>} The user's data if the token is valid.
+   */
   @UseApiKey()
   @HttpCode(HttpStatus.OK)
   @Post('verify-reset-password-token')
@@ -122,6 +158,12 @@ export class AuthController {
       });
   }
 
+  /**
+   * @method resetPassword
+   * @description Resets a user's password using a valid reset token.
+   * @param {ResetPasswordDto} param - The reset password data.
+   * @returns {Promise<void>}
+   */
   @UseApiKey()
   @HttpCode(HttpStatus.OK)
   @Post('reset-password')

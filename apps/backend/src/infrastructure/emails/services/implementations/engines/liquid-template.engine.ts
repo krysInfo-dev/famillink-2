@@ -2,6 +2,9 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { EMailsTemplateEngine } from '../../interfaces/emails-template.engine.interface';
 import { Liquid } from 'liquidjs';
 
+/**
+ * Implementation of the email template engine using LiquidJS.
+ */
 @Injectable()
 export class LiquidTemplateEngine implements EMailsTemplateEngine {
   private readonly engine: Liquid;
@@ -14,6 +17,13 @@ export class LiquidTemplateEngine implements EMailsTemplateEngine {
     });
   }
 
+  /**
+   * Renders a template with the given data.
+   * @param {string} template - The template string.
+   * @param {Record<string, string>} data - The data to render the template with.
+   * @returns {Promise<string>} The rendered template.
+   * @throws {InternalServerErrorException} If template rendering fails.
+   */
   async render(
     template: string,
     data: Record<string, string>,
@@ -30,6 +40,13 @@ export class LiquidTemplateEngine implements EMailsTemplateEngine {
     }
   }
 
+  /**
+   * Renders the subject of an email.
+   * This method is an alias for the render method.
+   * @param {string} template - The subject template string.
+   * @param {Record<string, string>} data - The data to render the subject with.
+   * @returns {Promise<string>} The rendered subject.
+   */
   async renderSubject(
     template: string,
     data: Record<string, string>,
