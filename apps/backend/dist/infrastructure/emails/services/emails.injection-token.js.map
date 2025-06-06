@@ -1,0 +1,1 @@
+{"version":3,"file":"emails.injection-token.js","sourceRoot":"","sources":["../../../../src/infrastructure/emails/services/emails.injection-token.ts"],"names":[],"mappings":";;;AAAa,QAAA,uBAAuB,GAAG;IACrC,cAAc,EAAE,gBAAgB;IAChC,eAAe,EAAE,iBAAiB;IAClC,mBAAmB,EAAE,qBAAqB;CAClC,CAAC"}
