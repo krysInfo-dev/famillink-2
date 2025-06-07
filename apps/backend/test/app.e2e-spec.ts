@@ -5,7 +5,7 @@ import { AppModule } from '../src/app.module';
 import { ConfigProvider } from '../src/domain/core/services/config-provider';
 
 class TestConfigProvider extends ConfigProvider {
-  private readonly config: { [key: string]: any } = {
+  private readonly config: { [key: string]: string | number } = {
     DB_TYPE: 'mysql',
     DB_HOST: 'localhost',
     DB_PORT: 3306,
@@ -51,6 +51,7 @@ describe('AppController (e2e)', () => {
   });
 
   it('/ (GET)', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return request(app.getHttpServer())
       .get('/')
       .expect(200)

@@ -15,7 +15,7 @@ import { ETokenType } from '../src/domain/users/entities/enum-token-type';
 
 // Test Config Provider to override the default one
 class TestConfigProvider extends ConfigProvider {
-  private readonly config: { [key: string]: any } = {
+  private readonly config: { [key: string]: string | number } = {
     DB_TYPE: 'mysql',
     DB_HOST: 'localhost',
     DB_PORT: 3306,
@@ -94,6 +94,7 @@ describe('AuthController (e2e)', () => {
 
   describe('/auth/login (POST)', () => {
     it('should return a JWT token on successful login', async () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       const response = await request(app.getHttpServer())
         .post('/auth/login')
         .send({ username: mockUser.userName, password: mockUser.password })
@@ -109,6 +110,7 @@ describe('AuthController (e2e)', () => {
     });
 
     it('should return 401 for invalid credentials', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       return request(app.getHttpServer())
         .post('/auth/login')
         .send({ username: mockUser.userName, password: 'wrongpassword' })
@@ -128,6 +130,7 @@ describe('AuthController (e2e)', () => {
           'Login must succeed and provide token and user id before logout test can run.',
         );
       }
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       return request(app.getHttpServer())
         .post('/auth/logout')
         .send({ token: loginResponse.token, userId: loginResponse.id })
@@ -144,6 +147,7 @@ describe('AuthController (e2e)', () => {
           'Login must succeed and provide username for forget-password test.',
         );
       }
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       await request(app.getHttpServer())
         .post('/auth/forget-password')
         .set('Authorization', `Bearer test-api-key`)
@@ -175,6 +179,7 @@ describe('AuthController (e2e)', () => {
           'Login must succeed and provide user id for verify-reset-password-token test.',
         );
       }
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       const response = await request(app.getHttpServer())
         .post('/auth/verify-reset-password-token')
         .set('Authorization', `Bearer test-api-key`)
@@ -194,6 +199,7 @@ describe('AuthController (e2e)', () => {
           'Login must succeed and provide user id for reset-password test.',
         );
       }
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       await request(app.getHttpServer())
         .post('/auth/reset-password')
         .set('Authorization', `Bearer test-api-key`)
@@ -205,6 +211,7 @@ describe('AuthController (e2e)', () => {
         .expect(200);
 
       // Try to login with the new password
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       await request(app.getHttpServer())
         .post('/auth/login')
         .send({ username: mockUser.userName, password: 'newpassword' })
