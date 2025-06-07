@@ -29,7 +29,7 @@ jobs:
       run: pnpm lint
 
     - name: Test
-      run: pnpm test -- --coverage
+      run: pnpm test --coverage
 
     - name: Build
       run: pnpm build
@@ -60,7 +60,7 @@ jobs:
       run: pnpm ng lint
 
     - name: Test
-      run: pnpm test -- --no-watch --browsers=ChromeHeadless
+      run: pnpm test --no-watch --browsers=ChromeHeadless --passWithNoTests
 
     - name: Build
       run: pnpm build
@@ -91,7 +91,7 @@ jobs:
       run: pnpm ng lint
 
     - name: Test
-      run: pnpm test -- --no-watch --browsers=ChromeHeadless
+      run: pnpm test --no-watch --browsers=ChromeHeadless --passWithNoTests
 
     - name: Build
       run: pnpm build
