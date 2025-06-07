@@ -51,7 +51,7 @@ export interface TokensDomainRepository {
    * @param {number} userId - The ID of the user.
    * @returns {Promise<Token | null>} The token entity with the user, or null if not found or invalid.
    */
-  readByTokenWithUserWhereUserIdIsUserIdIdAndTokenIsValid(
+  readByTokenWithUserWhereUserIdIsAndTokenIsValid(
     token: string,
     userId: number,
   ): Promise<Token | null>;

@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { ETokenType } from 'src/domain/users/entities/enum-token-type';
 import { Token } from 'src/domain/users/entities/token';
 import { User } from 'src/domain/users/entities/user';
@@ -14,6 +14,8 @@ import { v4 as uuidv4 } from 'uuid';
  */
 @Injectable()
 export class TokensService {
+  private readonly logger = new Logger(TokensService.name);
+
   /**
    * @param {UsersDomainRepository} userRepository - The repository for user data.
    * @param {TokensDomainRepository} tokenRepository - The repository for token data.
@@ -82,13 +84,17 @@ export class TokensService {
    * @param {number} userId - The user's ID.
    * @returns {Promise<User | null | undefined>} The user object, or null/undefined if not found or invalid.
    */
-  async getUserForTokenWhereUserIdIsUserIdIdAndTokenIsValid(
+  async getUserForTokenWhereUserIdIsAndTokenIsValid(
     token: string,
     userId: number,
   ): Promise<User | null | undefined> {
-    return await this.tokenRepository
-      .readByTokenWithUserWhereUserIdIsUserIdIdAndTokenIsValid(token, userId)
+    this.logger.error('token: ' + token);
+    this.logger.error('userId: ' + userId);
+    const result = await this.tokenRepository
+      .readByTokenWithUserWhereUserIdIsAndTokenIsValid(token, userId)
       .then((res) => res?.user);
+    this.logger.error(result);
+    return result;
   }
 
   /**

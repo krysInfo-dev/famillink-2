@@ -29,7 +29,7 @@ export class ResetPasswordUseCase {
     const user = await this.userService.read(param.userId);
     if (user) {
       user.password = param.newPassword;
+      await this.userService.update(user);
     }
-    return await this.userService.update(user);
   }
 }

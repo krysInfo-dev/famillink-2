@@ -78,7 +78,7 @@ export class TokensPersistanceService implements TokensDomainRepository {
    * @param {number} userId - The ID of the user.
    * @returns {Promise<TokenEntity | null>} The token entity with the user, or null if not found or invalid.
    */
-  async readByTokenWithUserWhereUserIdIsUserIdIdAndTokenIsValid(
+  async readByTokenWithUserWhereUserIdIsAndTokenIsValid(
     token: string,
     userId: number,
   ): Promise<TokenEntity | null> {

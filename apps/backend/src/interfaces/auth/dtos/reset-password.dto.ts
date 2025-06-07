@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 /**
  * @class ResetPasswordDto
@@ -13,6 +14,8 @@ export class ResetPasswordDto {
     description: 'The password reset token',
     type: String,
   })
+  @IsString()
+  @IsNotEmpty()
   token: string;
 
   /**
@@ -25,6 +28,8 @@ export class ResetPasswordDto {
     type: Number,
     example: 1,
   })
+  @IsNumber()
+  @IsNotEmpty()
   userId: number;
 
   /**
@@ -37,5 +42,7 @@ export class ResetPasswordDto {
     type: String,
     example: 'newPassword123',
   })
+  @IsString()
+  @IsNotEmpty()
   newPassword: string;
 }

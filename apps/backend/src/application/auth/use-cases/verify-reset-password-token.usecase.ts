@@ -22,7 +22,7 @@ export class VerifyResetPasswordTokenUseCase {
   async execute(
     param: VerifyResetPasswordToken,
   ): Promise<User | null | undefined> {
-    return await this.tokenEngine.getUserForTokenWhereUserIdIsUserIdIdAndTokenIsValid(
+    return await this.tokenEngine.getUserForTokenWhereUserIdIsAndTokenIsValid(
       param.token,
       param.userId,
     );

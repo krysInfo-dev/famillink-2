@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 /**
  * @class LogoutInfoDto
@@ -13,6 +14,8 @@ export class LogoutInfoDto {
     description: 'The JWT token',
     type: String,
   })
+  @IsString()
+  @IsNotEmpty()
   token: string;
 
   /**
@@ -25,5 +28,7 @@ export class LogoutInfoDto {
     type: Number,
     example: 1,
   })
+  @IsNumber()
+  @IsNotEmpty()
   userId: number;
 }
