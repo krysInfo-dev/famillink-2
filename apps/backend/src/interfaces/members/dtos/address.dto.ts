@@ -1,40 +1,66 @@
 import { ApiProperty } from '@nestjs/swagger';
 
+/**
+ * @class AddressDto
+ * @description DTO for an address.
+ */
 export class AddressDto {
+  /**
+   * The unique identifier of the address.
+   * @type {number}
+   */
   @ApiProperty({
-    description: "l'id unique de l'adresse",
+    description: 'The unique identifier of the address',
     type: 'number',
   })
   id?: number;
 
+  /**
+   * The street of the address.
+   * @type {string}
+   */
   @ApiProperty({
-    description: "la rue de l'adresse",
+    description: 'The street of the address',
     type: String,
   })
   street?: string;
 
+  /**
+   * The complement of the address, e.g., building number.
+   * @type {string}
+   */
   @ApiProperty({
-    description:
-      "Le complément de l'adresse, par exemple le numéro de bâtiment",
+    description: 'The complement of the address, e.g., building number',
     type: String,
   })
   complement?: string;
 
+  /**
+   * The zip code of the address.
+   * @type {string}
+   */
   @ApiProperty({
-    description: "Le code postal de l'adresse",
+    description: 'The zip code of the address',
     type: String,
   })
   zipCode?: string;
 
+  /**
+   * The city of the address.
+   * @type {string}
+   */
   @ApiProperty({
-    description:
-      "La commune de l'adresse, par exemple Paris, Lyon, Marseille, ...",
+    description: 'The city of the address, e.g., Paris, Lyon, Marseille, ...',
     type: String,
   })
   city?: string;
 
+  /**
+   * The country of the address.
+   * @type {string}
+   */
   @ApiProperty({
-    description: "Le pays de l'adresse",
+    description: 'The country of the address',
     type: String,
   })
   country?: string;

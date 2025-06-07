@@ -3,32 +3,57 @@ import { MemberDto } from './member.dto';
 import { ApiProperty } from '@nestjs/swagger';
 import { SocialNetwork } from 'src/domain/members/entities/social-network';
 
+/**
+ * @class SocialNetworkDto
+ * @description DTO for a social network.
+ */
 export class SocialNetworkDto {
+  /**
+   * The unique identifier.
+   * @type {number}
+   */
   @ApiProperty({
-    description: "l'id unique",
+    description: 'The unique identifier',
     type: 'number',
   })
   id?: number;
 
+  /**
+   * The member associated with this social network.
+   * @type {MemberDto}
+   */
   @ApiProperty({
-    description: 'le membre associé à ce réseau social',
-    type: MemberDto,
+    description: 'The member associated with this social network',
+    type: () => MemberDto,
   })
   member: MemberDto;
 
+  /**
+   * The type of this social network.
+   * @type {ESocialNetworkType}
+   */
   @ApiProperty({
-    description: 'le type de ce réseau social',
+    description: 'The type of this social network',
     enum: ESocialNetworkType,
     enumName: 'ESocialNetworkType',
   })
   socialNetworkType: ESocialNetworkType;
 
+  /**
+   * The value of the social network.
+   * @type {string}
+   */
   @ApiProperty({
-    description: 'La valeur du réseau social',
+    description: 'The value of the social network',
     type: 'string',
   })
   value: string;
 
+  /**
+   * Creates a SocialNetworkDto from a SocialNetwork entity.
+   * @param {SocialNetwork} entity - The social network entity.
+   * @returns {SocialNetworkDto} The created DTO.
+   */
   static fromEntity(entity: SocialNetwork): SocialNetworkDto {
     const dto = new SocialNetworkDto();
     dto.id = entity.id;
@@ -38,6 +63,11 @@ export class SocialNetworkDto {
     return dto;
   }
 
+  /**
+   * Creates a list of SocialNetworkDto from a list of SocialNetwork entities.
+   * @param {SocialNetwork[]} entities - The list of social network entities.
+   * @returns {SocialNetworkDto[] | undefined} The created list of DTOs.
+   */
   static fromEntities(
     entities: SocialNetwork[] | undefined,
   ): SocialNetworkDto[] | undefined {

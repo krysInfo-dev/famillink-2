@@ -2,9 +2,18 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsInt, IsOptional, IsString, Min } from 'class-validator';
 import { Type } from 'class-transformer';
 
+/**
+ * @class PaginationParamsDto
+ * @description DTO for pagination parameters.
+ */
 export class PaginationParamsDto {
+  /**
+   * The page number (starts at 1).
+   * @type {number}
+   * @default 1
+   */
   @ApiProperty({
-    description: 'Numéro de page (commence à 1)',
+    description: 'Page number (starts at 1)',
     default: 1,
     required: false,
     type: Number,
@@ -15,8 +24,13 @@ export class PaginationParamsDto {
   @Type(() => Number)
   page?: number = 1;
 
+  /**
+   * The number of items per page.
+   * @type {number}
+   * @default 10
+   */
   @ApiProperty({
-    description: "Nombre d'éléments par page",
+    description: 'Number of items per page',
     default: 10,
     required: false,
     type: Number,
@@ -27,8 +41,13 @@ export class PaginationParamsDto {
   @Type(() => Number)
   limit?: number = 10;
 
+  /**
+   * The sort field.
+   * @type {string}
+   * @default 'id'
+   */
   @ApiProperty({
-    description: 'Champ de tri',
+    description: 'Sort field',
     required: false,
     type: String,
   })
@@ -36,8 +55,13 @@ export class PaginationParamsDto {
   @IsOptional()
   sortBy?: string = 'id';
 
+  /**
+   * The sort direction (ASC or DESC).
+   * @type {'ASC' | 'DESC'}
+   * @default 'ASC'
+   */
   @ApiProperty({
-    description: 'Direction de tri (ASC ou DESC)',
+    description: 'Sort direction (ASC or DESC)',
     required: false,
     type: String,
     enum: ['ASC', 'DESC'],
@@ -46,8 +70,12 @@ export class PaginationParamsDto {
   @IsOptional()
   sortDirection?: 'ASC' | 'DESC' = 'ASC';
 
+  /**
+   * The search term to filter members.
+   * @type {string}
+   */
   @ApiProperty({
-    description: 'Terme de recherche pour filtrer les membres',
+    description: 'Search term to filter members',
     required: false,
     type: String,
   })

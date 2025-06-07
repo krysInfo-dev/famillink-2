@@ -6,14 +6,28 @@ import { Repository } from 'typeorm';
 import { UserEntity } from '../entities/user.entity';
 import { BcryptService } from 'src/infrastructure/core/services/bcrypt.service';
 
+/**
+ * TypeORM implementation of the users domain repository.
+ * This service handles database operations for users using TypeORM.
+ */
 @Injectable()
 export class UsersPersistanceService implements UsersDomainRepository {
+  /**
+   * @param {Repository<UserEntity>} userRepository - The TypeORM repository for users.
+   * @param {BcryptService} bcryptService - The service for hashing passwords.
+   */
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
     private readonly bcryptService: BcryptService,
   ) {}
 
+  /**
+   * Creates a new user.
+   * Hashes the password before saving.
+   * @param {UserEntity} entity - The user entity to create.
+   * @returns {Promise<number>} The ID of the created user.
+   */
   async create(entity: UserEntity): Promise<number> {
     entity.password = entity.password
       ? await this.bcryptService.hashPassword(entity.password)
@@ -21,14 +35,29 @@ export class UsersPersistanceService implements UsersDomainRepository {
     return await this.userRepository.save(entity).then((res) => res.id);
   }
 
+  /**
+   * Reads all users.
+   * @returns {Promise<UserEntity[]>} An array of all user entities.
+   */
   async readAll(): Promise<UserEntity[]> {
     return this.userRepository.find();
   }
 
+  /**
+   * Reads a user by their ID.
+   * @param {number} id - The ID of the user.
+   * @returns {Promise<UserEntity | null>} The user entity or null if not found.
+   */
   async read(id: number): Promise<UserEntity | null> {
     return await this.userRepository.findOneBy({ id }).then((res) => res);
   }
 
+  /**
+   * Updates a user.
+   * Hashes the password if it has been changed.
+   * @param {UserEntity | null} entity - The user entity to update.
+   * @returns {Promise<void>}
+   */
   async update(entity: UserEntity | null): Promise<void> {
     if (entity) {
       entity.password = entity.password
@@ -38,10 +67,21 @@ export class UsersPersistanceService implements UsersDomainRepository {
     }
   }
 
+  /**
+   * Deletes a user by their ID.
+   * @param {number} id - The ID of the user to delete.
+   * @returns {Promise<void>}
+   */
   async delete(id: number): Promise<void> {
     return await this.userRepository.delete(id).then(() => undefined);
   }
 
+  /**
+   * Finds a user by their username and password.
+   * @param {string} userName - The user's username.
+   * @param {string} password - The user's password.
+   * @returns {Promise<UserEntity | null>} The user entity if the credentials are valid, otherwise null.
+   */
   async findByUserNameAndPassword(
     userName: string,
     password: string,
@@ -59,6 +99,11 @@ export class UsersPersistanceService implements UsersDomainRepository {
     return null;
   }
 
+  /**
+   * Finds a user by their username.
+   * @param {string} userName - The user's username.
+   * @returns {Promise<UserEntity | null>} The user entity or null if not found.
+   */
   async findByUserName(userName: string): Promise<UserEntity | null> {
     return await this.userRepository
       .createQueryBuilder('user')
@@ -67,26 +112,31 @@ export class UsersPersistanceService implements UsersDomainRepository {
       .getOne();
   }
 
+  /**
+   * Finds users with pagination.
+   * @param {PaginationParamsDto} paginationParams - The pagination parameters.
+   * @returns {Promise<{ items: UserEntity[]; total: number }>} An object containing the items and total count.
+   */
   async findPaginated(
     paginationParams: PaginationParamsDto,
   ): Promise<{ items: UserEntity[]; total: number }> {
     const { page, limit, sortBy, sortDirection, search } = paginationParams;
 
-    // Calculer le décalage (offset) en fonction de la page et de la limite
+    // Calculate the offset based on the page and limit
     const skip = ((page ?? 1) - 1) * (limit ?? 0);
 
-    // Créer l'objet de tri
+    // Create the order object
     if (sortBy) {
       const order = {};
       order[sortBy] = sortDirection;
     }
 
-    // Préparer la requête de base
+    // Prepare the base query
     let query = this.userRepository
       .createQueryBuilder('user')
       .leftJoinAndSelect('user.member', 'member');
 
-    // Ajouter la condition de recherche pour les champs non chiffrés si un terme de recherche est fourni
+    // Add the search condition for unencrypted fields if a search term is provided
     if (search) {
       query = query.where(
         '(user.userName LIKE :search OR ' +
@@ -102,13 +152,13 @@ export class UsersPersistanceService implements UsersDomainRepository {
       );
     }
 
-    // Ajouter l'ordre, le décalage et la limite
+    // Add order, skip, and limit
     query = query
       .orderBy(`user.${sortBy}`, sortDirection)
       .skip(skip)
       .take(limit);
 
-    // Exécuter la requête
+    // Execute the query
     const [items, total] = await query.getManyAndCount();
     return { items: items, total };
   }

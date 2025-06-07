@@ -3,11 +3,11 @@
 **/node_modules
 
 # Compiled output
-/dist
-/build
-/tmp
-/out-tsc
-/bazel-out
+**/dist
+**/build
+**/tmp
+**/out-tsc
+**/bazel-out
 
 # Logs
 logs
@@ -49,8 +49,8 @@ Thumbs.db
 
 
 # Tests
-/coverage
-/.nyc_output
+**/coverage
+**/.nyc_output
 
 # dotenv environment variable files
 .env
