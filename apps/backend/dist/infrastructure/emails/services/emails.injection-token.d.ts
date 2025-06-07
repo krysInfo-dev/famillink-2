@@ -1,0 +1,6 @@
+export declare const EMAILS_INJECTION_TOKENS: {
+    readonly EMAIL_PROVIDER: "EMAIL_PROVIDER";
+    readonly TEMPLATE_ENGINE: "TEMPLATE_ENGINE";
+    readonly TEMPLATE_REPOSITORY: "TEMPLATE_REPOSITORY";
+};
+export type EMailsInjectionTokens = (typeof EMAILS_INJECTION_TOKENS)[keyof typeof EMAILS_INJECTION_TOKENS];
