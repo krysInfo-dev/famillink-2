@@ -3,7 +3,7 @@ import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 /**
  * @class LogoutInfoDto
- * @description DTO for user logout.
+ * @description DTO for users logout.
  */
 export class LogoutInfoDto {
   /**
@@ -19,12 +19,12 @@ export class LogoutInfoDto {
   token: string;
 
   /**
-   * The unique identifier of the user.
+   * The unique identifier of the users.
    * @type {number}
    * @example 1
    */
   @ApiProperty({
-    description: 'The unique identifier of the user',
+    description: 'The unique identifier of the users',
     type: Number,
     example: 1,
   })

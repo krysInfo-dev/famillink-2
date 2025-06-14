@@ -6,12 +6,12 @@ import { USERS_DOMAIN_REPOSITORY } from 'src/domain/users/repositories/users.inj
 
 /**
  * Service for managing users.
- * This service provides methods for finding and managing user data.
+ * This service provides methods for finding and managing users data.
  */
 @Injectable()
 export class UsersService {
   /**
-   * @param {UsersDomainRepository} userRepository - The repository for user data.
+   * @param {UsersDomainRepository} userRepository - The repository for users data.
    * @param {BcryptService} bcryptService - The service for password hashing and comparison.
    */
   constructor(
@@ -21,10 +21,10 @@ export class UsersService {
   ) {}
 
   /**
-   * Finds a user by their username and password.
-   * @param {string} userName - The user's username.
-   * @param {string} password - The user's password.
-   * @returns {Promise<User | null>} The user object if the credentials are valid, otherwise null.
+   * Finds a users by their username and password.
+   * @param {string} userName - The users's username.
+   * @param {string} password - The users's password.
+   * @returns {Promise<User | null>} The users object if the credentials are valid, otherwise null.
    */
   async findByUserNameAndPassword(
     userName: string,
@@ -44,26 +44,26 @@ export class UsersService {
   }
 
   /**
-   * Finds a user by their username.
-   * @param {string} userName - The user's username.
-   * @returns {Promise<User | null>} The user object, or null if not found.
+   * Finds a users by their username.
+   * @param {string} userName - The users's username.
+   * @returns {Promise<User | null>} The users object, or null if not found.
    */
   async findByUserName(userName: string): Promise<User | null> {
     return await this.userRepository.findByUserName(userName);
   }
 
   /**
-   * Reads a user by their ID.
-   * @param {number} userId - The ID of the user.
-   * @returns {Promise<User | null>} The user object, or null if not found.
+   * Reads a users by their ID.
+   * @param {number} userId - The ID of the users.
+   * @returns {Promise<User | null>} The users object, or null if not found.
    */
   async read(userId: number): Promise<User | null> {
     return await this.userRepository.read(userId);
   }
 
   /**
-   * Updates a user's information.
-   * @param {User | null} user - The user object with updated information.
+   * Updates a users's information.
+   * @param {User | null} user - The users object with updated information.
    * @returns {Promise<void>}
    */
   async update(user: User | null): Promise<void> {

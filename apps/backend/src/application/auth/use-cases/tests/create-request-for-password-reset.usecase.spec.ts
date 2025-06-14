@@ -68,7 +68,7 @@ describe('CreateRequestForPasswordResetUseCase', () => {
   });
 
   describe('execute', () => {
-    it('should create a password reset token and send an email if user is found', async () => {
+    it('should create a password reset token and send an email if users is found', async () => {
       const findByUserNameSpy = jest
         .spyOn(usersService, 'findByUserName')
         .mockResolvedValue(mockUser);
@@ -85,7 +85,7 @@ describe('CreateRequestForPasswordResetUseCase', () => {
       expect(sendEmailSpy).toHaveBeenCalledWith('reset-token', mockUser);
     });
 
-    it('should not do anything if user is not found', async () => {
+    it('should not do anything if users is not found', async () => {
       const findByUserNameSpy = jest
         .spyOn(usersService, 'findByUserName')
         .mockResolvedValue(null);

@@ -5,7 +5,7 @@ import { User } from 'src/domain/users/entities/user';
 
 /**
  * Use case for verifying a password reset token.
- * This class is responsible for checking if a given password reset token is valid and belongs to the specified user.
+ * This class is responsible for checking if a given password reset token is valid and belongs to the specified users.
  */
 @Injectable()
 export class VerifyResetPasswordTokenUseCase {
@@ -16,8 +16,8 @@ export class VerifyResetPasswordTokenUseCase {
 
   /**
    * Executes the token verification process.
-   * @param {VerifyResetPasswordToken} param - The parameters for token verification, including the token and user ID.
-   * @returns {Promise<User | null | undefined>} The user associated with the token if it's valid, otherwise null or undefined.
+   * @param {VerifyResetPasswordToken} param - The parameters for token verification, including the token and users ID.
+   * @returns {Promise<User | null | undefined>} The users associated with the token if it's valid, otherwise null or undefined.
    */
   async execute(
     param: VerifyResetPasswordToken,

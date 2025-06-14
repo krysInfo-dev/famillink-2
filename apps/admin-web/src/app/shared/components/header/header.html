@@ -1,0 +1,21 @@
+<mat-toolbar>
+  <span>
+    <img src="/logo-app-32.svg" alt="logo" />
+  </span>
+  <span class="header-title">Famillink</span>
+  <span class="example-spacer"></span>
+  <button mat-button routerLink="/news/news-list">
+    <span>Nouvelles</span>
+  </button>
+  <button mat-button routerLink="/member/member-list">
+    <span>Membres</span>
+  </button>
+  <button mat-button routerLink="/user/user-list">
+    <span>Utilisateurs</span>
+  </button>
+  <span class="example-spacer"></span>
+  <button matButton [matMenuTriggerFor]="menu">{{ loadedUser() }}</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="auth/logout">Se déconnecter</button>
+  </mat-menu>
+</mat-toolbar>

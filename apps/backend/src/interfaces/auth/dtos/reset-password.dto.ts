@@ -3,7 +3,7 @@ import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 /**
  * @class ResetPasswordDto
- * @description DTO for resetting user password.
+ * @description DTO for resetting users password.
  */
 export class ResetPasswordDto {
   /**
@@ -19,12 +19,12 @@ export class ResetPasswordDto {
   token: string;
 
   /**
-   * The unique identifier of the user.
+   * The unique identifier of the users.
    * @type {number}
    * @example 1
    */
   @ApiProperty({
-    description: 'The unique identifier of the user',
+    description: 'The unique identifier of the users',
     type: Number,
     example: 1,
   })

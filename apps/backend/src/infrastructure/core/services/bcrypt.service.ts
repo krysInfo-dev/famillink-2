@@ -10,7 +10,7 @@ export class BcryptService {
    * The number of salt rounds to use for hashing.
    * @private
    */
-  private readonly saltRounds = 10; // You can adjust this value
+  private readonly saltRounds = 12; // You can adjust this value
 
   /**
    * Hashes a password using bcrypt.

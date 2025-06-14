@@ -43,7 +43,7 @@ describe('VerifyResetPasswordTokenUseCase', () => {
   });
 
   describe('execute', () => {
-    it('should return user if token is valid', async () => {
+    it('should return users if token is valid', async () => {
       tokensService.getUserForTokenWhereUserIdIsAndTokenIsValid.mockResolvedValue(
         mockUser,
       );

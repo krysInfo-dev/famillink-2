@@ -18,15 +18,15 @@ export class LoginInfoDto {
   })
   @IsString()
   @IsNotEmpty()
-  username: string;
+  email: string;
 
   /**
-   * The user's password.
+   * The users's password.
    * @type {string}
    * @example 'password123'
    */
   @ApiProperty({
-    description: "The user's password",
+    description: "The users's password",
     type: String,
     example: 'password123',
   })

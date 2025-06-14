@@ -19,12 +19,12 @@ export class VerifyResetPasswordTokenDto {
   token: string;
 
   /**
-   * The unique identifier of the user.
+   * The unique identifier of the users.
    * @type {number}
    * @example 1
    */
   @ApiProperty({
-    description: 'The unique identifier of the user',
+    description: 'The unique identifier of the users',
     type: Number,
     example: 1,
   })

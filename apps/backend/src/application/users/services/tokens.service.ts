@@ -9,7 +9,7 @@ import { USERS_DOMAIN_REPOSITORY } from 'src/domain/users/repositories/users.inj
 import { v4 as uuidv4 } from 'uuid';
 
 /**
- * Service for managing user tokens.
+ * Service for managing users tokens.
  * This service handles the creation, validation, and management of different types of tokens.
  */
 @Injectable()
@@ -17,7 +17,7 @@ export class TokensService {
   private readonly logger = new Logger(TokensService.name);
 
   /**
-   * @param {UsersDomainRepository} userRepository - The repository for user data.
+   * @param {UsersDomainRepository} userRepository - The repository for users data.
    * @param {TokensDomainRepository} tokenRepository - The repository for token data.
    */
   constructor(
@@ -28,8 +28,8 @@ export class TokensService {
   ) {}
 
   /**
-   * Creates a token for a new user.
-   * @param {number} userId - The ID of the user.
+   * Creates a token for a new users.
+   * @param {number} userId - The ID of the users.
    * @param {number} duration - The duration in milliseconds for which the token is valid.
    * @returns {Promise<string>} The generated token.
    */
@@ -42,7 +42,7 @@ export class TokensService {
 
   /**
    * Creates a token for password reset.
-   * @param {number} userId - The ID of the user.
+   * @param {number} userId - The ID of the users.
    * @param {number} duration - The duration in milliseconds for which the token is valid.
    * @returns {Promise<string>} The generated token.
    */
@@ -68,9 +68,9 @@ export class TokensService {
   }
 
   /**
-   * Retrieves the user associated with a given token.
+   * Retrieves the users associated with a given token.
    * @param {string} token - The token.
-   * @returns {Promise<User | null | undefined>} The user object, or null/undefined if not found.
+   * @returns {Promise<User | null | undefined>} The users object, or null/undefined if not found.
    */
   async getUserForToken(token: string): Promise<User | null | undefined> {
     const tokenEntity = await this.tokenRepository.readByTokenWithUser(token);
@@ -79,21 +79,21 @@ export class TokensService {
   }
 
   /**
-   * Retrieves a user for a token if the token is valid and belongs to the specified user.
+   * Retrieves a users for a token if the token is valid and belongs to the specified users.
    * @param {string} token - The token.
-   * @param {number} userId - The user's ID.
-   * @returns {Promise<User | null | undefined>} The user object, or null/undefined if not found or invalid.
+   * @param {number} userId - The users's ID.
+   * @returns {Promise<User | null | undefined>} The users object, or null/undefined if not found or invalid.
    */
   async getUserForTokenWhereUserIdIsAndTokenIsValid(
     token: string,
     userId: number,
   ): Promise<User | null | undefined> {
-    this.logger.error('token: ' + token);
-    this.logger.error('userId: ' + userId);
+    this.logger.debug('token: ' + token);
+    this.logger.debug('userId: ' + userId);
     const result = await this.tokenRepository
       .readByTokenWithUserWhereUserIdIsAndTokenIsValid(token, userId)
       .then((res) => res?.user);
-    this.logger.error(result);
+    this.logger.debug(result);
     return result;
   }
 
@@ -121,7 +121,7 @@ export class TokensService {
    * Adds a used JWT token to the repository.
    * This is used to invalidate JWTs upon logout.
    * @param {string} token - The JWT token.
-   * @param {number} userId - The ID of the user.
+   * @param {number} userId - The ID of the users.
    * @returns {Promise<void>}
    */
   async addUsedJwtToken(token: string, userId: number): Promise<void> {
@@ -149,7 +149,7 @@ export class TokensService {
 
   /**
    * Private method to create a token entity and save it to the repository.
-   * @param {number} userId - The ID of the user.
+   * @param {number} userId - The ID of the users.
    * @param {number} duration - The duration in milliseconds for which the token is valid.
    * @param {ETokenType} type - The type of the token.
    * @returns {Promise<string>} The generated token string.

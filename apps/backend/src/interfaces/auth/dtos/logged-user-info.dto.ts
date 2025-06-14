@@ -3,16 +3,16 @@ import { ERole } from 'src/domain/users/entities/enum-role';
 
 /**
  * @class LoggedUserInfoDto
- * @description Information about the logged-in user.
+ * @description Information about the logged-in users.
  */
 export class LoggedUserInfoDto {
   /**
-   * The unique identifier of the user.
+   * The unique identifier of the users.
    * @type {number}
    * @example 1
    */
   @ApiProperty({
-    description: 'The unique identifier of the user',
+    description: 'The unique identifier of the users',
     type: Number,
     example: 1,
   })
@@ -31,30 +31,30 @@ export class LoggedUserInfoDto {
   username: string;
 
   /**
-   * The full name of the user.
+   * The full name of the users.
    * @type {string}
    * @example 'John Doe'
    */
   @ApiProperty({
-    description: 'The full name of the user',
+    description: 'The full name of the users',
     type: String,
     example: 'John Doe',
   })
   fullName: string;
 
   /**
-   * The role of the user.
+   * The role of the users.
    * @type {ERole}
    * @enum {ERole}
    */
   @ApiProperty({
-    description: 'The role of the user',
+    description: 'The role of the users',
     enum: ERole,
   })
   role: ERole;
 
   /**
-   * The unique identifier of the member (if the user is one).
+   * The unique identifier of the member (if the users is one).
    * @type {number}
    * @example 123
    */

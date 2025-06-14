@@ -1,0 +1,5 @@
+export const environment = {
+  production: false,
+  apiBaseUrl: 'http://localhost:3000/api',
+  internalApiKey: 'dba7927621ae9fdbdd0c78ea80728d80c2c33ccf4e4abee33a5ccd09046730feb493cfcc485212ac6f1fac02bb0dbd1025106b2448c72b5137f6f66c171e787b2ba42a4af5c5d3e895024d2794e5faccb7eaf72aebc31baae699d4426a3c8a02763e17f42f8a85fed11ee8f67d4b3c927b888d73252feb350a47d39dc073f0b5',
+};

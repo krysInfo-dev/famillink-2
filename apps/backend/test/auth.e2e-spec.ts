@@ -79,7 +79,7 @@ describe('AuthController (e2e)', () => {
     // Clean up database before tests
     // Now handled by dropSchema: true
 
-    // Create a user for testing
+    // Create a users for testing
     const hashedPassword = await bcryptService.hashPassword(mockUser.password);
     await usersRepository.save({
       userName: mockUser.userName,
@@ -127,7 +127,7 @@ describe('AuthController (e2e)', () => {
         loginResponse.id === undefined
       ) {
         throw new Error(
-          'Login must succeed and provide token and user id before logout test can run.',
+          'Login must succeed and provide token and users id before logout test can run.',
         );
       }
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
@@ -168,7 +168,7 @@ describe('AuthController (e2e)', () => {
       }
     });
 
-    it('/auth/verify-reset-password-token (POST) should return user info for a valid token', async () => {
+    it('/auth/verify-reset-password-token (POST) should return users info for a valid token', async () => {
       if (!resetToken) {
         throw new Error(
           'Reset token must be defined from the forget-password test.',
@@ -176,7 +176,7 @@ describe('AuthController (e2e)', () => {
       }
       if (!loginResponse || loginResponse.id === undefined) {
         throw new Error(
-          'Login must succeed and provide user id for verify-reset-password-token test.',
+          'Login must succeed and provide users id for verify-reset-password-token test.',
         );
       }
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
@@ -196,7 +196,7 @@ describe('AuthController (e2e)', () => {
       }
       if (!loginResponse || loginResponse.id === undefined) {
         throw new Error(
-          'Login must succeed and provide user id for reset-password test.',
+          'Login must succeed and provide users id for reset-password test.',
         );
       }
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument

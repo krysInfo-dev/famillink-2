@@ -47,7 +47,7 @@ describe('ResetPasswordUseCase', () => {
   });
 
   describe('execute', () => {
-    it('should reset password and update user', async () => {
+    it('should reset password and update users', async () => {
       const setTokenUsedSpy = jest.spyOn(tokensService, 'setTokenUsed');
       const readUserSpy = jest
         .spyOn(usersService, 'read')
@@ -66,7 +66,7 @@ describe('ResetPasswordUseCase', () => {
       expect(updateUserSpy).toHaveBeenCalledWith(mockUser);
     });
 
-    it('should not update user if user is not found', async () => {
+    it('should not update users if users is not found', async () => {
       const setTokenUsedSpy = jest.spyOn(tokensService, 'setTokenUsed');
       const readUserSpy = jest
         .spyOn(usersService, 'read')

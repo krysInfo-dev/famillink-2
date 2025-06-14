@@ -28,9 +28,9 @@ export interface TokensDomainRepository {
   readByToken(token: string): Promise<Token | null>;
 
   /**
-   * Reads a token by its token string and includes the associated user.
+   * Reads a token by its token string and includes the associated users.
    * @param {string} token - The token string.
-   * @returns {Promise<Token | null>} The token entity with the user, or null if not found.
+   * @returns {Promise<Token | null>} The token entity with the users, or null if not found.
    */
   readByTokenWithUser(token: string): Promise<Token | null>;
 
@@ -46,10 +46,10 @@ export interface TokensDomainRepository {
   ): Promise<Token | null>;
 
   /**
-   * Reads a token by its string and user ID, and checks if it's valid.
+   * Reads a token by its string and users ID, and checks if it's valid.
    * @param {string} token - The token string.
-   * @param {number} userId - The ID of the user.
-   * @returns {Promise<Token | null>} The token entity with the user, or null if not found or invalid.
+   * @param {number} userId - The ID of the users.
+   * @returns {Promise<Token | null>} The token entity with the users, or null if not found or invalid.
    */
   readByTokenWithUserWhereUserIdIsAndTokenIsValid(
     token: string,
