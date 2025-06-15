@@ -1,75 +1,107 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 /**
- * DTO pour les métadonnées de pagination
- *
- * Ce DTO contient les informations sur la pagination actuelle,
- * comme le nombre total d'éléments, le nombre de pages, etc.
+ * @class PaginationMetaDto
+ * @description DTO for pagination metadata.
+ * This DTO contains information about the current pagination,
+ * such as the total number of items, number of pages, etc.
  */
 export class PaginationMetaDto {
+  /**
+   * The total number of items.
+   * @type {number}
+   */
   @ApiProperty({
-    description: "Nombre total d'éléments",
+    description: 'Total number of items',
     type: Number,
   })
   totalItems: number;
 
+  /**
+   * The total number of pages.
+   * @type {number}
+   */
   @ApiProperty({
-    description: 'Nombre total de pages',
+    description: 'Total number of pages',
     type: Number,
   })
   totalPages: number;
 
+  /**
+   * The current page.
+   * @type {number}
+   */
   @ApiProperty({
-    description: 'Page actuelle',
+    description: 'Current page',
     type: Number,
   })
   currentPage?: number;
 
+  /**
+   * The number of items per page.
+   * @type {number}
+   */
   @ApiProperty({
-    description: "Nombre d'éléments par page",
+    description: 'Number of items per page',
     type: Number,
   })
   itemsPerPage?: number;
 
+  /**
+   * Indicates if there is a previous page.
+   * @type {boolean}
+   */
   @ApiProperty({
-    description: 'Y a-t-il une page précédente',
+    description: 'Indicates if there is a previous page',
     type: Boolean,
   })
   hasPreviousPage: boolean;
 
+  /**
+   * Indicates if there is a next page.
+   * @type {boolean}
+   */
   @ApiProperty({
-    description: 'Y a-t-il une page suivante',
+    description: 'Indicates if there is a next page',
     type: Boolean,
   })
   hasNextPage: boolean;
 }
 
 /**
- * DTO générique pour une réponse paginée
- *
- * Ce DTO est utilisé pour renvoyer une liste paginée d'éléments
- * avec les métadonnées de pagination.
+ * @class PaginatedResponseDto
+ * @description Generic DTO for a paginated response.
+ * This DTO is used to return a paginated list of items
+ * with pagination metadata.
+ * @template T
  */
 export class PaginatedResponseDto<T> {
+  /**
+   * The list of items for the current page.
+   * @type {T[]}
+   */
   @ApiProperty({
-    description: 'Liste des éléments pour la page actuelle',
+    description: 'List of items for the current page',
     isArray: true,
   })
   items: T[];
 
+  /**
+   * The pagination metadata.
+   * @type {PaginationMetaDto}
+   */
   @ApiProperty({
-    description: 'Métadonnées de pagination',
+    description: 'Pagination metadata',
     type: PaginationMetaDto,
   })
   meta: PaginationMetaDto;
 
   /**
-   * Crée une nouvelle instance de PaginatedResponseDto
-   *
-   * @param items Les éléments pour la page actuelle
-   * @param totalItems Le nombre total d'éléments
-   * @param currentPage La page actuelle
-   * @param itemsPerPage Le nombre d'éléments par page
+   * Creates a new instance of PaginatedResponseDto.
+   * @param {T[]} items The items for the current page.
+   * @param {number} totalItems The total number of items.
+   * @param {number} currentPage The current page.
+   * @param {number} itemsPerPage The number of items per page.
    */
   constructor(
     items: T[],

@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-content>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <h2>Connexion</h2>
+      @if (!loginError()) {
+        <mat-error>
+          L'email ou le mot de passe sont invalides.
+        </mat-error>
+      }
+      <mat-form-field>
+        <input matInput placeholder="Email" [(ngModel)]="email" name="email" required>
+        <mat-error>
+          Veuillez renseigner un email valide.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
+        <mat-error>
+         Veuillez renseigner un mot de passe valide.
+        </mat-error>
+      </mat-form-field>
+      <div style="margin-bottom: 12px;">
+        <a routerLink="/auth/forget-password">Mot de passe oublié ?</a>
+      </div>
+      <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid">Login</button>
+    </form>
+  </mat-card-content>
+</mat-card>

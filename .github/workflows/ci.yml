@@ -1,0 +1,97 @@
+name: CI Famillink
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./apps/backend
+    steps:
+    - uses: actions/checkout@v4
+    - uses: pnpm/action-setup@v4      
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        cache: 'pnpm'
+
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+      working-directory: .
+
+    - name: Lint
+      run: pnpm lint
+
+    - name: Test
+      run: pnpm test --coverage
+
+    - name: Build
+      run: pnpm build
+
+  admin-web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./apps/admin-web
+    steps:
+    - uses: actions/checkout@v4
+    - uses: pnpm/action-setup@v4      
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        cache: 'pnpm'
+
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+      working-directory: .
+      
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+      working-directory: ./apps/admin-web
+
+    - name: Lint
+      run: pnpm ng lint
+
+    - name: Test
+      run: pnpm test --no-watch --browsers=ChromeHeadless --passWithNoTests
+
+    - name: Build
+      run: pnpm build
+
+  mobile-app:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./apps/mobile-app
+    steps:
+    - uses: actions/checkout@v4
+    - uses: pnpm/action-setup@v4      
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        cache: 'pnpm'
+
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+      working-directory: .
+
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+      working-directory: ./apps/mobile-app
+
+    - name: Lint
+      run: pnpm ng lint
+
+    - name: Test
+      run: pnpm test --no-watch --browsers=ChromeHeadless --passWithNoTests
+
+    - name: Build
+      run: pnpm build

@@ -1,14 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 
+/**
+ * Service for handling bcrypt hashing and comparison.
+ */
 @Injectable()
 export class BcryptService {
-  private readonly saltRounds = 10; // Vous pouvez ajuster cette valeur
+  /**
+   * The number of salt rounds to use for hashing.
+   * @private
+   */
+  private readonly saltRounds = 12; // You can adjust this value
 
   /**
    * Hashes a password using bcrypt.
-   * @param password The plain text password.
-   * @returns A promise that resolves to the hashed password.
+   * @param {string} password - The plain text password.
+   * @returns {Promise<string>} A promise that resolves to the hashed password.
    */
   async hashPassword(password: string): Promise<string> {
     return bcrypt.hash(password, this.saltRounds);
@@ -16,9 +23,9 @@ export class BcryptService {
 
   /**
    * Compares a plain text password with a hash.
-   * @param password The plain text password.
-   * @param hash The hashed password to compare against.
-   * @returns A promise that resolves to true if the password matches the hash, false otherwise.
+   * @param {string} password - The plain text password.
+   * @param {string} hash - The hashed password to compare against.
+   * @returns {Promise<boolean>} A promise that resolves to true if the password matches the hash, false otherwise.
    */
   async comparePasswordWithHash(
     password: string,

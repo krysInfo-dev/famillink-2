@@ -43,6 +43,7 @@ import { UsersModule } from './users.module';
           UserEntity,
         ],
         synchronize: configProvider.getString('DB_SYNCHRONIZE') === 'true', // true en dev, false en prod (utilisez les migrations)
+        dropSchema: configProvider.getString('DB_DROP_SCHEMA') === 'true',
       }),
     }),
     EMailsModule.forRoot(),

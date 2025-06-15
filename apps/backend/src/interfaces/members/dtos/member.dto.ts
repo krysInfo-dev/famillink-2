@@ -4,97 +4,168 @@ import { Member } from 'src/domain/members/entities/member';
 import { SocialNetworkDto } from './social-network.dto';
 import { AddressDto } from './address.dto';
 
+/**
+ * @class MemberDto
+ * @description DTO for a member.
+ */
 export class MemberDto {
+  /**
+   * The unique identifier of the member.
+   * @type {number}
+   */
   @ApiProperty({
-    description: "L'id unique du membre",
+    description: 'The unique identifier of the member',
     type: 'number',
   })
   id?: number;
 
+  /**
+   * The unique code of the member.
+   * @type {string}
+   */
   @ApiProperty({
-    description: 'Le code unique du membre',
+    description: 'The unique code of the member',
     type: 'string',
   })
   code?: string;
 
+  /**
+   * The first name of the member.
+   * @type {string}
+   */
   @ApiProperty({
-    description: 'Le prénom du membre',
+    description: 'The first name of the member',
     type: 'string',
   })
   firstName?: string;
 
+  /**
+   * The last name of the member.
+   * @type {string}
+   */
   @ApiProperty({
-    description: 'Le nom de famille du membre',
+    description: 'The last name of the member',
     type: 'string',
   })
   lastName?: string;
 
+  /**
+   * The nickname of the member.
+   * @type {string}
+   */
   @ApiProperty({
-    description: 'Le surnom du membre',
+    description: 'The nickname of the member',
     type: 'string',
   })
   nickName?: string;
 
+  /**
+   * The birth date of the member.
+   * @type {Date}
+   */
   @ApiProperty({
-    description: 'La date de naissance du membre',
+    description: 'The birth date of the member',
     type: 'string',
+    format: 'date-time',
   })
   birthDate?: Date;
 
+  /**
+   * The death date of the member.
+   * @type {Date}
+   */
   @ApiProperty({
-    description: 'La date de décès du membre',
+    description: 'The death date of the member',
     type: 'string',
+    format: 'date-time',
   })
   deathDate?: Date;
 
+  /**
+   * The address of the member.
+   * @type {AddressDto}
+   */
   @ApiProperty({
-    description: "L'adresse du membre",
+    description: 'The address of the member',
     type: AddressDto,
   })
   address?: AddressDto;
 
+  /**
+   * The phone number of the member.
+   * @type {string}
+   */
   @ApiProperty({
-    description: 'Le numéro de téléphone du membre',
+    description: 'The phone number of the member',
     type: 'string',
   })
   phoneNumber?: string;
 
+  /**
+   * The mobile number of the member.
+   * @type {string}
+   */
   @ApiProperty({
-    description: 'Le numéro de mobile du membre',
+    description: 'The mobile number of the member',
     type: 'string',
   })
   mobileNumber?: string;
 
+  /**
+   * The email of the member.
+   * @type {string}
+   */
   @ApiProperty({
-    description: "L'email du membre",
+    description: 'The email of the member',
     type: 'string',
   })
   email?: string;
 
+  /**
+   * The website of the member.
+   * @type {string}
+   */
   @ApiProperty({
-    description: 'Le site web du membre',
+    description: 'The website of the member',
     type: 'string',
   })
   website?: string;
 
+  /**
+   * The social networks of the member.
+   * @type {SocialNetworkDto[]}
+   */
   @ApiProperty({
-    description: 'Les réseaux sociaux du membre',
+    description: 'The social networks of the member',
     type: [SocialNetworkDto],
   })
   socialsNetworks?: SocialNetworkDto[];
 
+  /**
+   * The biography of the member.
+   * @type {string}
+   */
   @ApiProperty({
-    description: 'La biographie du membre',
+    description: 'The biography of the member',
     type: 'string',
   })
   biography?: string;
 
+  /**
+   * The profile picture of the member.
+   * @type {DocumentDto}
+   */
   @ApiProperty({
-    description: 'La photo de profil du membre',
+    description: 'The profile picture of the member',
     type: DocumentDto,
   })
   photo?: DocumentDto;
 
+  /**
+   * Creates a MemberDto from a Member entity.
+   * @param {Member} entity - The member entity.
+   * @returns {MemberDto} The created DTO.
+   */
   static fromEntity(entity: Member): MemberDto {
     const dto = new MemberDto();
     dto.id = entity.id;
@@ -117,6 +188,11 @@ export class MemberDto {
     return dto;
   }
 
+  /**
+   * Creates a list of MemberDto from a list of Member entities.
+   * @param {Member[]} entities - The list of member entities.
+   * @returns {MemberDto[] | undefined} The created list of DTOs.
+   */
   static fromEntities(entities: Member[] | undefined): MemberDto[] | undefined {
     if (!entities) {
       return undefined;
